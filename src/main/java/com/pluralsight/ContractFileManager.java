@@ -9,30 +9,37 @@ public class ContractFileManager {
         Dealership dealership = null;
         ArrayList<Vehicle> vehicles = new ArrayList<>();
 
+        String line;
+
         try (BufferedReader br = new BufferedReader(new FileReader("contracts.csv"))) {
-            String line;
-            int lineNumber = 0;
+
             while ((line = br.readLine()) != null) {
                 String[] fields = line.split("\\|");
-                if (lineNumber == 0) {
-                    String name = fields[0];
-                    String address = fields[1];
-                    String phone = fields[2];
-                    dealership = new Dealership(name, address, phone);
-                } else {
-                    int vin = Integer.parseInt(fields[0]);
-                    int year = Integer.parseInt(fields[1]);
-                    String make = fields[2];
-                    String model = fields[3];
-                    String vehicleType = fields[4];
-                    String color = fields[5];
-                    int odometer = Integer.parseInt(fields[6]);
-                    double price = Double.parseDouble(fields[7]);
-                    Vehicle vehicle = new Vehicle(vin, year, make, model, vehicleType, color, odometer, price);
+
+                    String type = fields[0];
+                    int contractDate = Integer.parseInt(fields[1]);
+                    String name = fields[2];
+                    String email = fields[3];
+                    int carId = Integer.parseInt(fields[5]);
+                    int year = Integer.parseInt(fields[6]);
+                    String make = fields[7];
+                    String model = fields[8];
+                    String vehicleType = fields[9];
+                    String color = fields[10];
+                    int odometer = Integer.parseInt(fields[11]);
+                    double price = Double.parseDouble(fields[12]);
+                    double salesTax = Double.parseDouble(fields[13]);
+                    double recordingFee = Double.parseDouble(fields[14]);
+                    double processingFee = Double.parseDouble(fields[15]);
+                    double totalCost = Double.parseDouble(fields[16]);
+                    double finance = Double.parseDouble(fields[17]);
+                    double monthlyPayment = Double.parseDouble(fields[18]);
+
+                    Vehicle vehicle = new Vehicle(type, contractDate, name, email, carId, year, make, model, vehicleType, color, odometer, price, salesTax, recordingFee, processingFee, totalCost, finance, monthlyPayment);
                     vehicles.add(vehicle);
                 }
-                lineNumber++;
-            }
+
+
         } catch (IOException e) {
             e.printStackTrace();
         }
