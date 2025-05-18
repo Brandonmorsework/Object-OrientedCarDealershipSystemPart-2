@@ -7,11 +7,13 @@ private double recordingFee;
 private double processingFee;
 private boolean financeOption;
 
-    public SalesContract(String date, String name, String email, boolean vehicleSold, Vehicle vehicle, double salesTaxAmount, double recordingFee, double processingFee) {
+    public SalesContract(String date, String name, String email, boolean vehicleSold, Vehicle vehicle, boolean financeOption) {
         super(date, name, email, vehicleSold, vehicle);
-        this.salesTaxAmount = salesTaxAmount;
-        this.recordingFee = recordingFee;
-        this.processingFee = processingFee;
+        double price = vehicle.getPrice();
+        this.salesTaxAmount = price * 0.05;
+        this.recordingFee = 100;
+        this.processingFee = price < 10000 ? 295 : 495;
+        this.financeOption = financeOption;
     }
 
     public double getSalesTaxAmount() {
