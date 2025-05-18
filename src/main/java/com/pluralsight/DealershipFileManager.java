@@ -9,7 +9,7 @@ public class DealershipFileManager {
         Dealership dealership = null;
         ArrayList<Vehicle> vehicles = new ArrayList<>();
 
-        try (BufferedReader br = new BufferedReader(new FileReader("contracts.csv"))) {
+        try (BufferedReader br = new BufferedReader(new FileReader("Vehicles.csv"))) {
             String line;
             int lineNumber = 0;
             while ((line = br.readLine()) != null) {
@@ -47,7 +47,7 @@ public class DealershipFileManager {
     }
 
     public void saveDealership(Dealership dealership) {
-        try (BufferedWriter bw = new BufferedWriter(new FileWriter("contracts.csv"))) {
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter("Vehicles.csv"))) {
 
             bw.write(dealership.getName() + "|" + dealership.getAddress() + "|" + dealership.getPhone());
             bw.newLine();
@@ -59,7 +59,7 @@ public class DealershipFileManager {
                 bw.newLine();
             }
 
-            System.out.println("Dealership saved successfully to dealership.csv.");
+            System.out.println("Vehicle saved successfully to Vehicles.csv.");
         } catch (IOException e) {
             e.printStackTrace();
         }
