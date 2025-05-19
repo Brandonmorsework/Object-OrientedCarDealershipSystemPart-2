@@ -24,12 +24,21 @@ public class ContractFileManager {
             vehicle.getOdometer(),
             vehicle.getPrice());
 
-
-
             if (contract instanceof SalesContract) {
+            SalesContract sc = (SalesContract) contract;
 
-
-
+            String scLine = String.format("SALE|%s|%s|%s|%s|%.2f|%.2f|%.2f|%s|%.2f|%.2f",
+            date,
+            name,
+            email,
+            isSold,
+            vehicleInfo,
+            sc.getSalesTaxAmount(),
+            sc.getRecordingFee(),
+            sc.getProcessingFee(),
+            sc.isFinanceOption(),
+            sc.getTotalPrice(),
+            sc.getMonthlyPayment());
 
         } else if (contract instanceof LeaseContract){
 
