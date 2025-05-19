@@ -6,7 +6,7 @@ import java.io.*;
 public class ContractFileManager {
 
     public void saveContract(Contract contract) {
-        try (BufferedWriter bw = new BufferedWriter(new FileWriter("contracts.csv"))) {
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter("contracts.csv", true))) {
 
         String date = contract.getDate();
         String name = contract.getName();
@@ -27,7 +27,7 @@ public class ContractFileManager {
             if (contract instanceof SalesContract) {
             SalesContract sc = (SalesContract) contract;
 
-            String scLine = String.format("SALE|%s|%s|%s|%s|%.2f|%.2f|%.2f|%s|%.2f|%.2f",
+            String scLine = String.format("SALE|%s|%s|%s|%s|%s|%.2f|%.2f|%.2f|%s|%.2f|%.2f",
             date,
             name,
             email,
@@ -40,7 +40,26 @@ public class ContractFileManager {
             sc.getTotalPrice(),
             sc.getMonthlyPayment());
 
-        } else if (contract instanceof LeaseContract){
+            bw.write(scLine);
+            bw.newLine();
+
+        } else if (contract instanceof LeaseContract) {
+
+        LeaseContract lc = (LeaseContract) contract;
+
+            String lcLine = String.format("LEASE|%s|%s|%s|%b|%s|%.2f|%.2f|%.2f|%.2f",
+            date,
+            name,
+            email,
+            isSold,
+            vehicleInfo,
+            lc.getExpectedEndingValue(),
+            lc.getLeaseFee(),
+            lc.getTotalPrice(),
+            lc.getMonthlyPayment());
+
+            bw.write(lcLine);
+            bw.newLine();
 
             }
 
