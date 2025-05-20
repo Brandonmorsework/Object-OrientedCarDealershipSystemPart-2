@@ -104,6 +104,8 @@ public class Dealership {
         return inventory;
     }
 
+
+
     public void addVehicle(Vehicle vehicle) {
         inventory.add(vehicle);
     }

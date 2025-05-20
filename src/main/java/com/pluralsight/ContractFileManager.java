@@ -5,8 +5,11 @@ import java.io.*;
 
 public class ContractFileManager {
 
+    private static final String CONTRACTS_FILE_NAME = "contracts.csv";
+
     public void saveContract(Contract contract) {
-        try (BufferedWriter bw = new BufferedWriter(new FileWriter("contracts.csv", true))) {
+
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(CONTRACTS_FILE_NAME, true))) {
 
         String date = contract.getDate();
         String name = contract.getName();
@@ -69,6 +72,5 @@ public class ContractFileManager {
             e.printStackTrace();
         }
     }
-
 }
 

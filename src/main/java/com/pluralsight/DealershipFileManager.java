@@ -5,11 +5,14 @@ import java.util.ArrayList;
 
 public class DealershipFileManager {
 
+    private static final String VEHICLE_FILE_NAME = "Vehicles.csv";
+
     public Dealership getDealership() {
+
         Dealership dealership = null;
         ArrayList<Vehicle> vehicles = new ArrayList<>();
 
-        try (BufferedReader br = new BufferedReader(new FileReader("Vehicles.csv"))) {
+        try (BufferedReader br = new BufferedReader(new FileReader(VEHICLE_FILE_NAME))) {
             String line;
             int lineNumber = 0;
             while ((line = br.readLine()) != null) {
@@ -47,7 +50,7 @@ public class DealershipFileManager {
     }
 
     public void saveDealership(Dealership dealership) {
-        try (BufferedWriter bw = new BufferedWriter(new FileWriter("Vehicles.csv"))) {
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(VEHICLE_FILE_NAME))) {
 
             bw.write(dealership.getName() + "|" + dealership.getAddress() + "|" + dealership.getPhone());
             bw.newLine();
@@ -57,12 +60,13 @@ public class DealershipFileManager {
                         + "|" + vehicle.getVehicleType() + "|" + vehicle.getColor() + "|" + vehicle.getOdometer()
                         + "|" + vehicle.getPrice());
                 bw.newLine();
+
             }
 
             System.out.println("Vehicle saved successfully to Vehicles.csv.");
+
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
-
 }
