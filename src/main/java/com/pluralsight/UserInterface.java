@@ -1,5 +1,6 @@
 package com.pluralsight;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Scanner;
 
@@ -215,7 +216,6 @@ public class UserInterface {
                 System.out.printf("%-12s | %-10s | %-30s | %-20s | %-20s | %-20s | %-20s | $%10.2f\n", vehicle.getVin(), vehicle.getYear(), vehicle.getMake(), vehicle.getModel(), vehicle.getVehicleType(), vehicle.getColor(), vehicle.getOdometer(), vehicle.getPrice());
             }
         }
-
     }
 
     public void processGetAllVehiclesRequest() {
@@ -405,39 +405,60 @@ public class UserInterface {
 
     private void addLeaseOrSale() {
 
+       String leaseOrSale = null;
 
-        System.out.println("Is this a Lease or Sale?");
-        String leaseOrSale = scanner.nextLine();
+        while (leaseOrSale == null) {
+
+            try {
+
+                System.out.print("Enter vehicle ID: ");
+                int vin = scanner.nextInt();
+                scanner.nextLine();
+
+                Vehicle vehicle = dealership.getVehiclesById(vin);
+                if (vehicle == null) {
+                    System.out.println("No vehicle found with This ID...");
+                    continue;
+                }
+
+                int year = vehicle.getYear();
+
+                System.out.println("Is this a Lease or Sale?");
+                String leaseOrSaleInput = scanner.nextLine();
 
 
+                if (leaseOrSaleInput.equalsIgnoreCase("lease")) {
+                    if (LocalDate.now().getYear() - year <= 3) {
+                        leaseOrSale = "lease";
+                        System.out.println("Leasing is Available for this Vehicle!");
+                        System.out.println(" ");
 
-        System.out.print("Enter vehicle vin: ");
-        int vin = scanner.nextInt();
-        scanner.nextLine();
+                    } else {
+                        System.out.println(" ");
+                        System.out.println("Apologies, Leasing is Not Available for This Vehicle since it is Older Than 3 Years...");
+                        System.out.println(" ");
 
-        System.out.print("Enter vehicle make: ");
-        String make = scanner.nextLine();
+                    }
+                } else if (leaseOrSaleInput.equalsIgnoreCase("sale")) {
+                    System.out.println("Vehicle Sale: ");
+                }
+            } catch (Exception e) {
+                System.out.println("Invalid Entry");
+            }
+        }
 
-        System.out.print("Enter vehicle model: ");
-        String model = scanner.nextLine();
+        System.out.println("Please Enter Your Name: ");
+        String userName = scanner.nextLine();
 
-        System.out.print("Enter vehicle year: ");
-        int year = scanner.nextInt();
-        scanner.nextLine();
+        System.out.println("Please Enter Your Email: ");
+        String userEmail = scanner.nextLine();
 
-        System.out.print("Enter vehicle price: ");
-        double price = scanner.nextDouble();
-        scanner.nextLine();
+        System.out.println("Will You Finance This Purchase?  Y / N ? ");
+        String financeOption = scanner.nextLine();
 
-        System.out.print("Enter vehicle color: ");
-        String color = scanner.nextLine();
+        if (financeOption.equalsIgnoreCase("yes") || financeOption.equalsIgnoreCase("y")) {
 
-        System.out.print("Enter vehicle mileage: ");
-        int mileage = scanner.nextInt();
-        scanner.nextLine();
-
-        System.out.print("Enter vehicle type (Car, Truck, SUV, Motorcycle): ");
-        String type = scanner.nextLine();
+        }
 
     }
 

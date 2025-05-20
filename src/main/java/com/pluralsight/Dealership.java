@@ -40,6 +40,15 @@ public class Dealership {
         this.phone = phone;
     }
 
+    public Vehicle getVehiclesById(int vin) {
+        for (Vehicle vehicle : inventory) {
+            if (vehicle.getVin() == vin) {
+                return vehicle;
+            }
+        }
+        return null;
+    }
+
     public List<Vehicle> getVehiclesByPrice(double min, double max) {
         List<Vehicle> matchingVehicles = new ArrayList<>();
         for (Vehicle vehicle : inventory) {
