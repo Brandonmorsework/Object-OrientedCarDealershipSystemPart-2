@@ -1,6 +1,7 @@
 package com.pluralsight;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Scanner;
 
@@ -406,6 +407,7 @@ public class UserInterface {
     private void addLeaseOrSale() {
 
        String leaseOrSale = null;
+        Vehicle vehicle = null;
 
         while (leaseOrSale == null) {
 
@@ -415,7 +417,8 @@ public class UserInterface {
                 int vin = scanner.nextInt();
                 scanner.nextLine();
 
-                Vehicle vehicle = dealership.getVehiclesById(vin);
+                vehicle = dealership.getVehiclesById(vin);
+
                 if (vehicle == null) {
                     System.out.println("No vehicle found with This ID...");
                     continue;
@@ -447,6 +450,8 @@ public class UserInterface {
             }
         }
 
+        String date = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyyMMdd"));
+
         System.out.println("Please Enter Your Name: ");
         String userName = scanner.nextLine();
 
@@ -454,12 +459,17 @@ public class UserInterface {
         String userEmail = scanner.nextLine();
 
         System.out.println("Will You Finance This Purchase?  Y / N ? ");
-        String financeOption = scanner.nextLine();
+        String financeOptionInput = scanner.nextLine();
+        boolean isFinanced = financeOptionInput.equalsIgnoreCase("y");
+        boolean vehicleSold = true;
 
-        if (financeOption.equalsIgnoreCase("yes") || financeOption.equalsIgnoreCase("y")) {
 
-        }
 
+        SalesContract contract = new SalesContract(date, userName, userEmail, vehicleSold, vehicle, isFinanced);
+
+        ContractFileManager contractFileManager = new ContractFileManager();
+
+        contractFileManager.saveContract(contract);
     }
 
 }
