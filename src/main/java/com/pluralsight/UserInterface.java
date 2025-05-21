@@ -406,7 +406,8 @@ public class UserInterface {
 
     private void addLeaseOrSale() {
 
-       String leaseOrSale = null;
+        String leaseOrSale = null;
+
         Vehicle vehicle = null;
 
         while (leaseOrSale == null) {
@@ -444,7 +445,6 @@ public class UserInterface {
                         String userName = scanner.nextLine();
 
                         System.out.println("Please Enter Your Email: ");
-
                         System.out.println(" ");
                         String userEmail = scanner.nextLine();
 
@@ -456,6 +456,8 @@ public class UserInterface {
 
                         contractFileManager.saveContract(contract);
 
+                        dealership.removeVehicle(vehicle);
+                        System.out.println("Vehicle Removed From Vehicles List Successfully!");
 
                     } else {
 
@@ -464,34 +466,37 @@ public class UserInterface {
                         System.out.println(" ");
 
                     }
+
                 } else if (leaseOrSaleInput.equalsIgnoreCase("sale")) {
                     leaseOrSale = "sale";
                     System.out.println("Vehicle Sale: ");
+
+                    String date = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyyMMdd"));
+
+                    System.out.println("Please Enter Your Name: ");
+                    String userName = scanner.nextLine();
+
+                    System.out.println("Please Enter Your Email: ");
+                    String userEmail = scanner.nextLine();
+
+                    System.out.println("Will You Finance This Purchase?  Y / N ? ");
+                    String financeOptionInput = scanner.nextLine();
+                    boolean isFinanced = financeOptionInput.equalsIgnoreCase("y");
+                    boolean vehicleSold = true;
+
+                    SalesContract contract = new SalesContract(date, userName, userEmail, vehicleSold, vehicle, isFinanced);
+
+                    ContractFileManager contractFileManager = new ContractFileManager();
+
+                    contractFileManager.saveContract(contract);
+
+                    dealership.removeVehicle(vehicle);
+                    System.out.println("Vehicle Removed From Vehicles List Successfully!");
+
                 }
             } catch (Exception e) {
                 System.out.println("Invalid Entry");
             }
         }
-
-        String date = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyyMMdd"));
-
-        System.out.println("Please Enter Your Name: ");
-        String userName = scanner.nextLine();
-
-        System.out.println("Please Enter Your Email: ");
-        String userEmail = scanner.nextLine();
-
-        System.out.println("Will You Finance This Purchase?  Y / N ? ");
-        String financeOptionInput = scanner.nextLine();
-        boolean isFinanced = financeOptionInput.equalsIgnoreCase("y");
-        boolean vehicleSold = true;
-
-
-
-        SalesContract contract = new SalesContract(date, userName, userEmail, vehicleSold, vehicle, isFinanced);
-
-        ContractFileManager contractFileManager = new ContractFileManager();
-
-        contractFileManager.saveContract(contract);
     }
 }

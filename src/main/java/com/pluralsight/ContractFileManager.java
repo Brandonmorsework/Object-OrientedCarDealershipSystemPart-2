@@ -46,6 +46,8 @@ public class ContractFileManager {
             bw.write(scLine);
             bw.newLine();
 
+            System.out.println("Sale Saved successfully to Contracts File!");
+
         } else if (contract instanceof LeaseContract) {
 
         LeaseContract lc = (LeaseContract) contract;
@@ -64,11 +66,9 @@ public class ContractFileManager {
             bw.write(lcLine);
             bw.newLine();
 
-                System.out.println("Lease saved Successfully to Contracts File!");
+                System.out.println("Lease Saved Successfully to Contracts File!");
 
             }
-
-            System.out.println("Contract saved successfully to Contracts file!");
 
         } catch (IOException e) {
             e.printStackTrace();
