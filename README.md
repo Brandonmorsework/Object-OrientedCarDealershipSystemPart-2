@@ -11,7 +11,7 @@
 - As a user, I want vehicles a customer wants to buy or lease to get removed from the Vehicle list so that information is always up to date
 
 - As a user, I want the calculations to differ depending on whether a lease or sale is being processed so that I can speed up the vehicle to contract process
-- 
+
 ## Setup
 
 1. Create the UserInterface, DealershipFileManager, Dealership, Vehicle and Program classes
