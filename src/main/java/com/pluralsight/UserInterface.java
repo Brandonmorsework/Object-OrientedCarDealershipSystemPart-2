@@ -457,6 +457,8 @@ public class UserInterface {
                         contractFileManager.saveContract(contract);
 
                         dealership.removeVehicle(vehicle);
+                        DealershipFileManager manager = new DealershipFileManager();
+                        manager.saveDealership(dealership);
                         System.out.println("Vehicle Removed From Vehicles List Successfully!");
 
                     } else {
@@ -491,6 +493,8 @@ public class UserInterface {
                     contractFileManager.saveContract(contract);
 
                     dealership.removeVehicle(vehicle);
+                    DealershipFileManager manager = new DealershipFileManager();
+                    manager.saveDealership(dealership);
                     System.out.println("Vehicle Removed From Vehicles List Successfully!");
 
                 }
