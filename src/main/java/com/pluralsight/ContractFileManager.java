@@ -64,9 +64,11 @@ public class ContractFileManager {
             bw.write(lcLine);
             bw.newLine();
 
+                System.out.println("Lease saved Successfully to Contracts File!");
+
             }
 
-            System.out.println("Contract saved successfully to contracts.csv.");
+            System.out.println("Contract saved successfully to Contracts file!");
 
         } catch (IOException e) {
             e.printStackTrace();

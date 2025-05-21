@@ -432,17 +432,40 @@ public class UserInterface {
 
                 if (leaseOrSaleInput.equalsIgnoreCase("lease")) {
                     if (LocalDate.now().getYear() - year <= 3) {
+
                         leaseOrSale = "lease";
                         System.out.println("Leasing is Available for this Vehicle!");
                         System.out.println(" ");
 
+                        String date = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyyMMdd"));
+
+                        System.out.println("Please Enter Your Name: ");
+                        System.out.println(" ");
+                        String userName = scanner.nextLine();
+
+                        System.out.println("Please Enter Your Email: ");
+
+                        System.out.println(" ");
+                        String userEmail = scanner.nextLine();
+
+                        boolean vehicleSold = true;
+
+                        LeaseContract contract = new LeaseContract(date, userName, userEmail, vehicleSold, vehicle);
+
+                        ContractFileManager contractFileManager = new ContractFileManager();
+
+                        contractFileManager.saveContract(contract);
+
+
                     } else {
+
                         System.out.println(" ");
                         System.out.println("Apologies, Leasing is Not Available for This Vehicle since it is Older Than 3 Years...");
                         System.out.println(" ");
 
                     }
                 } else if (leaseOrSaleInput.equalsIgnoreCase("sale")) {
+                    leaseOrSale = "sale";
                     System.out.println("Vehicle Sale: ");
                 }
             } catch (Exception e) {
@@ -471,5 +494,4 @@ public class UserInterface {
 
         contractFileManager.saveContract(contract);
     }
-
 }
